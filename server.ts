@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT;
-const API_KEY = process.env.API_KEY_ANIMAL!;
 
 app.get("/", (req, res) => {
   res.send("Hello World");
