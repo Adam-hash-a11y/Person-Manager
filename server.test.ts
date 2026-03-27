@@ -1,16 +1,15 @@
 import request from "supertest";
 import { app } from "./server";
+import { Server } from "http";
 
 describe("GET /", () => {
-  //@ts-ignore
-  let server;
+  let server: Server;
   beforeAll((done) => {
     server = app.listen(3000);
     done();
   });
 
   afterAll((done) => {
-    //@ts-ignore
     server.close();
     done();
   });
@@ -26,15 +25,14 @@ describe("GET /", () => {
 });
 
 describe("POST /adam", () => {
-  //@ts-ignore
-  let server;
+  let server: Server;
   beforeAll((done) => {
     server = app.listen(3000);
     done();
   });
 
   afterAll((done) => {
-    //@ts-ignore
+  
     server.close();
     done();
   });
