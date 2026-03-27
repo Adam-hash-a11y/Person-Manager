@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.ts",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "eslint": "npx eslint ."
   },
   "keywords": [],
