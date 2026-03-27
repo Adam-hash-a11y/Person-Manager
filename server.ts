@@ -1,19 +1,27 @@
 import express from "express";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT;
+export const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
+const PORT = process.env.PORT;
+const API_KEY = process.env.API_KEY_ANIMAL!;
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+//nouns not verbs (getuser x) users
+//plural  products
+//nesting level max 3
+
 app.post("/adam", (req, res) => {
-  res.send(req.body);
+  console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(PORT, () => {
