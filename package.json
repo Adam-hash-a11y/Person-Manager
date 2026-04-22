@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon main.ts",
-    "test": "jest --detectOpenHandles",
-    "eslint": "npx eslint ."
+    "test": "jest",
+    "eslint": "npx eslint .",
+    "prettier": "npx prettier . --write"
   },
   "keywords": [],
   "author": "",
