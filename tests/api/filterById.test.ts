@@ -44,6 +44,7 @@ describe("GET /:id", () => {
     expect(response.status).toBe(404);
     expect(response.body.error).toBe("person is not found");
   });
+
   it("should return an error (400) bad request if the id is a string ", async () => {
     //Given
     const userId = "abc";
