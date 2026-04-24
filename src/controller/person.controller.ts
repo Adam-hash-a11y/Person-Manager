@@ -15,7 +15,6 @@ import {
   isValidQueryParams,
   isValidType,
 } from "../validator/person.validator";
-import { rules } from "eslint-plugin-react";
 
 export const findPersonById = (req: Request<{ id: string }>, res: Response) => {
   const userId = Number(req.params.id);
