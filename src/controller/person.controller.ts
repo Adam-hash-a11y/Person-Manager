@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { filterById, addPerson } from "../service/personServices";
+import {
+  filterById,
+  addPerson,
+  getPeopleStats,
+} from "../service/personServices";
 import {
   isExisitingPerson,
   isValidAge,
@@ -7,7 +11,7 @@ import {
   isValidId,
   isValidKeys,
   isValidName,
-  isValidType
+  isValidType,
 } from "../validator/person.validator";
 
 export const findPersonById = (req: Request<{ id: string }>, res: Response) => {
@@ -32,13 +36,19 @@ export const addPersons = (req: Request, res: Response) => {
     return res.status(400).json({ message: "id must be a positive integer" });
   }
   if (!isExisitingPerson(req.body.id)) {
-    return res.status(409).json({ message: "person with this id already exists" });
+    return res
+      .status(409)
+      .json({ message: "person with this id already exists" });
   }
   if (!isValidName(req.body.name)) {
-    return res.status(400).json({ message: "name must contain only letters and be at least 3 characters" });
+    return res.status(400).json({
+      message: "name must contain only letters and be at least 3 characters",
+    });
   }
   if (!isValidAge(req.body.age)) {
-    return res.status(400).json({ message: "age must be a positive integer under 150" });
+    return res
+      .status(400)
+      .json({ message: "age must be a positive integer under 150" });
   }
   if (!isValidGender(req.body.gender)) {
     return res.status(400).json({ message: "gender must be male or female" });
@@ -49,4 +59,9 @@ export const addPersons = (req: Request, res: Response) => {
 
   const result = addPerson(req.body);
   return res.status(201).json(result);
+};
+
+export const getStats = (req: Request, res: Response) => {
+  const result = getPeopleStats();
+  return res.status(200).json(result);
 };
