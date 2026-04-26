@@ -1,7 +1,7 @@
 import { GENDER, Person, TYPE } from "../types/person.type";
 
 //Enums
-export const personList: Person[] = [
+export const originalData: Person[] = [
   {
     id: 11,
     name: "Mia Taylor",
@@ -26,3 +26,5 @@ export const personList: Person[] = [
     type: TYPE.kid,
   },
 ];
+
+export const personList: Person[] = [...originalData];
