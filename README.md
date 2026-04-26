@@ -2,15 +2,42 @@
 
 A REST API for managing a list of persons with full CRUD operations, statistics, and filtering by gender and type.
 
+This project includes:
+- strict validation layer
+- unit tests (API, service, validator)
+- CI pipeline (GitHub Actions)
+- linting + pre-commit hooks (Husky)
+
 ---
 
-## Tech Stack
+## Project Structure
+src/
+├── api/
+├── controller/
+├── routes/
+├── service/
+├── types/
+├── validator/
+└── data/
+tests/
+├── api/
+├── service/
+└── validator/
+.github/
+└── workflows/
+.husky/
 
-- Node.js + Express
-- TypeScript
-- Jest + Supertest
-- Validator.js
-- Dotenv
+---
+
+## Features
+
+- Full CRUD operations on persons
+- Filter persons by gender and type via query params
+- Person statistics endpoint
+- Strict validation — no extra fields, no missing fields, no invalid types
+- Fully tested — api, service and validator layers
+- CI pipeline with automated test and lint checks
+- Pre-commit hook enforcement via Husky
 
 ---
 
@@ -74,7 +101,6 @@ GET /api/persons?gender=male&type=kid
 
 ### GET /api/persons/stats
 Returns count of kids, men and women.
-GET /api/persons/stats
 
 **Response 200**
 ```json
@@ -89,7 +115,6 @@ GET /api/persons/stats
 
 ### GET /api/persons/:id
 Returns a person by id.
-GET /api/persons/1
 
 **Response 200**
 ```json
@@ -114,7 +139,6 @@ GET /api/persons/1
 
 ### POST /api/persons/add-person
 Adds a new person to the list.
-POST /api/persons/add-person
 
 **Request body**
 ```json
@@ -147,7 +171,6 @@ POST /api/persons/add-person
 
 ### DELETE /api/persons/:id
 Deletes a person by id.
-DELETE /api/persons/1
 
 **Response 200**
 ```json
@@ -174,16 +197,14 @@ DELETE /api/persons/1
 
 ---
 
-## Project Structure
-src/
-api/        → express app setup
-controller/ → request/response handling
-service/    → business logic
-validator/  → input validation
-routes/     → route definitions
-types/      → TypeScript types and enums
-data/       → person data
-tests/
-api/        → api integration tests
-service/    → service unit tests
-validator/  → validator unit tests
+## CI Pipeline
+
+- runs unit tests
+- runs ESLint checks
+- ensures code quality before merge
+
+## Git Hooks
+
+Pre-commit hooks via Husky ensure:
+- lint rules are respected
+- tests pass before every commit
