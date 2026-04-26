@@ -203,3 +203,63 @@ describe("test GET / ", () => {
     expect(result.body.message).toBe("type must be kid, men or women");
   });
 });
+
+describe("DELETE /api/persons/:id", () => {
+  let server: Server;
+  beforeAll((done) => {
+    server = app.listen(3000);
+    done();
+  });
+
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+  it("should delete a person and return updated list", async () => {
+    // Given
+    const userId = 11;
+
+    // When
+    const result = await request(app).delete(`/api/persons/${userId}`);
+
+    // Then
+    expect(result.status).toBe(200);
+    expect(result.body.find((p: { id: number; }) => p.id === userId)).toBeUndefined();
+  });
+
+  it("should return 404 when person does not exist", async () => {
+    // Given
+    const userId = 99999;
+
+    // When
+    const result = await request(app).delete(`/api/persons/${userId}`);
+
+    // Then
+    expect(result.status).toBe(404);
+    expect(result.body.message).toBe("person not found");
+  });
+
+  it("should return 400 when id is a string", async () => {
+    // Given
+    const userId = "abc";
+
+    // When
+    const result = await request(app).delete(`/api/persons/${userId}`);
+
+    // Then
+    expect(result.status).toBe(400);
+    expect(result.body.message).toBe("invalid id, the id must be a number");
+  });
+
+  it("should return 400 when id is negative", async () => {
+    // Given
+    const userId = -1;
+
+    // When
+    const result = await request(app).delete(`/api/persons/${userId}`);
+
+    // Then
+    expect(result.status).toBe(400);
+    expect(result.body.message).toBe("invalid id, the id must be a number");
+  });
+});

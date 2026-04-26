@@ -7,6 +7,17 @@ export function filterById(id: number): Person[] {
   });
 }
 
+export const deletePerson = (id: number): Person[] => {
+  let i = 0;
+  while (i < personList.length && personList[i].id !== id) {
+    i++;
+  }
+  if (personList[i]?.id === id) {
+    personList.splice(i, 1);
+  }
+  return personList;
+};
+
 export const addPerson = (body: Person): Person[] => {
   const { id, age, gender, type, name } = body;
   personList.push({ id, age, gender, type, name });
